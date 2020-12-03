@@ -5,8 +5,9 @@ using UnityEngine;
 public class Node
 {
     public int name;
-    public Node[] children;
+    public List<Vector3Int> children;
     public Vector3 position;
+
     
 
 
@@ -14,11 +15,13 @@ public class Node
 
 
 
-    public Node(Node[] children, Vector3 position, int name)
+    public Node(List<Vector3Int> children, int name, Vector3 position)
     {
         this.children = children;
-        this.position = position;
         this.name = name;
+        this.position = position;
+
     }
+    
     
 }

@@ -92,6 +92,9 @@ TextureImporter:
   - first:
       213: -6562727451349084731
     second: MapTiles_29
+  - first:
+      213: 6716863905613679926
+    second: MapTiles_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
