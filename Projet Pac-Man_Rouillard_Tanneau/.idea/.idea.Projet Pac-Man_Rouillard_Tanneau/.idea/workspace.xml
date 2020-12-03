@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="81bf52ff-828d-48a3-8688-287999165f5d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Map_tilemap.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Map_tilemap.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_0.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_0.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_1.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_1.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_10.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_10.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_11.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_11.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_12.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_12.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_13.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_13.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_14.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_14.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_15.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_15.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_16.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_16.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_17.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_17.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_18.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_18.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_19.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_19.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_2.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_2.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_20.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_20.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_21.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_21.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_22.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_22.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_23.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_23.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_24.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_24.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_25.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_25.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_26.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_26.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_27.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_27.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_28.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_28.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_29.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_29.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_3.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_3.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_4.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_4.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_5.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_5.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_6.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_6.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_7.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_7.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_8.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_8.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_9.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/MapTiles_9.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/Map_Tilemap.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/Map/Map_Tilemap.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/MapTiles.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/11/11364dd2f978cf76e06c35fed3d12389" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/1a/1a3345b16874c54faa642ed74fece98d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/1e/1ec8e9900f7664c916e9965dc24c50a6" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/2a/2ac6be03eadb13e5b58e24c3b1a9bc1d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/2d/2d6f23b1a651c5b80d635e06aafe6a8b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/2f/2f51985ef613c2c5b236717d1d07f4e4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/31/31399005e17eb9f9ec66855c2f97cc0f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/33/33b0a50e4f05e07b5fb96ed12df74b59" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/39/3927fd4b0904e95acbe45948f5db0959" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/55/55a0bf10201d2b3f257b5dc1c841cbac" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/5d/5d38a849301ef5e59c413768c82efd29" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/5d/5d54a3c6594b14b650c1db059b2fcabd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/60/60a53ba4ebbaeffbe250b108225761a1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/6d/6d40af75ff319d36426ae0c6f924a6f7" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/78/7830c383422a29ba068886883fab45da" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/7b/7bcb7e8668557d586bb6ef66ada56b15" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/7d/7df941da20be5ac6805c56bbf8a5a6ea" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/95/956448bbedfcbd49e3fc62d08059939a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/96/96f69b9bd96b65480110582aca56144e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/b2/b290534998905bb55a003cc4a9ba6803" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/c1/c1fd3c7d1b67841f2fff06aca1774a07" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/c7/c7ddb5df6e04841b689a416b1dfc5db9" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/dd/dd0271cc1f633f4b511ce17276ac16b7" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/f4/f4d9f86cd5432d1e3afbcc74a669e457" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/f9/f9d20d960567ffb83fd598fb2247c45a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/Artifacts/fb/fb6ec662e44740bde9d9a22efc00b208" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/ShaderCache/1/12b74b34f14408afee69172d5ef6f3c5.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/ShaderCache/2/270887b83896fc3ec73db0bec5a90927.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/ShaderCache/5/5819389b4ac4173885c0d964f55a7ef4.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/ShaderCache/5/5bbf4ea33483da403ab946d23cb3aa15.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/ShaderCache/e/e17faa2f2afc55b8708ea95e926c2fed.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/ShaderCache/e/e7c6b89f16b38558747e84eb12e7f576.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/StateCache/Hierarchy/4c969a-3f205c74dc9de434b8.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/StateCache/SceneView/cc2798-3f205c74dc9de434b8.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/shadercompiler-UnityShaderCompiler.exe1.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/shadercompiler-UnityShaderCompiler.exe2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Level1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Characters.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Characters.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/MapTiles.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tilemap/MapTiles.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/MapTiles.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/AnnotationManager" beforeDir="false" afterPath="$PROJECT_DIR$/Library/AnnotationManager" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ArtifactDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Artifacts/02/02c314c470b8c43a546290c9795329b8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Artifacts/16/1620d10d083fa93c3eb93f0a0ac65120" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Artifacts/2e/2e886688d36d898430239ab2f13472a4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Artifacts/3c/3c41044bd10104e30b73c4e4df88af89" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Artifacts/9b/9b64fa316081cfc5e15f623cf347d5a2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/CurrentLayout-default.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/Library/CurrentLayout-default.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/GridBrush/UnityEditor.Tilemaps.GridBrush.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Library/GridBrush/UnityEditor.Tilemaps.GridBrush.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/SceneVisibilityState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Library/SceneVisibilityState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/ShaderCache/EditorEncounteredVariants" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ShaderCache/EditorEncounteredVariants" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/Library/SourceAssetDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/StateCache/SceneView/cc2798-mainStage.json" beforeDir="false" afterPath="$PROJECT_DIR$/Library/StateCache/SceneView/cc2798-mainStage.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1l6YIbNomYphBKR75kK5G2XGxQL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="selectedOptions">
+        <set />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="selectedOptions">
+        <set />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81bf52ff-828d-48a3-8688-287999165f5d" name="Default Changelist" comment="" />
+      <created>1606918934274</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606918934274</updated>
+      <workItem from="1606918945615" duration="3331000" />
+      <workItem from="1606983488725" duration="4246000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
