@@ -6,7 +6,8 @@ public class Node
 {
     public int name;
     public List<Vector3Int> children;
-    public Vector3 position;
+    public Vector3Int position;
+    public Node parent;
 
     
 
@@ -15,12 +16,12 @@ public class Node
 
 
 
-    public Node(List<Vector3Int> children, int name, Vector3 position)
+    public Node(List<Vector3Int> children,Vector3Int position, Node parent)
     {
         this.children = children;
         this.name = name;
         this.position = position;
-
+        this.parent = parent;
     }
     
     

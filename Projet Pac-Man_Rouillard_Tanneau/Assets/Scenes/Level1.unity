@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maptilemap: {fileID: 19722207}
-  startingtile: {x: -3, y: 11, z: 0}
+  startingtile: {x: 5, y: 2, z: 0}
 --- !u!4 &1633669400
 Transform:
   m_ObjectHideFlags: 0
