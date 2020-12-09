@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 7680722994674414042}
   - component: {fileID: 7680722994674414047}
   - component: {fileID: 7680722994674414040}
+  - component: {fileID: 6040921285331508616}
+  - component: {fileID: -1871926399510660670}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7680722994674414043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.055394, y: 0.7906095, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -114,7 +116,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -130,3 +132,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &6040921285331508616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7680722994674414043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a456d1f5f64f9a41890f377e64c3a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  life1: {fileID: 7893439289407702418, guid: e2101d3e5a2837c41b01eb1f9a83abce, type: 3}
+  life2: {fileID: 8679506485460398508, guid: 86d9c6d423a9ec64f9751dcf538bdbce, type: 3}
+  life3: {fileID: 3896517622784564851, guid: eae6eadb1561064489b80fe9877e980a, type: 3}
+  score: 0
+  life: 3
+--- !u!111 &-1871926399510660670
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7680722994674414043}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 6c166bb0e9e62784f98ced4d0fc770f9, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 6c166bb0e9e62784f98ced4d0fc770f9, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

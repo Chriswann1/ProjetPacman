@@ -1,3 +1,33 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@Toms56 
+Chriswann1
+/
+ProjetPacman
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+ProjetPacman/.gitignore
+
+Chriswann Pathfinding Tilemap Recognition
+Latest commit aee47ae 6 days ago
+ History
+ 1 contributor
+61 lines (50 sloc)  1.34 KB
+  
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
@@ -59,3 +89,15 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
