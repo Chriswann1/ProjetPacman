@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,12 +9,16 @@ using UnityEngine.Tilemaps;
 public class Pathfinder : MonoBehaviour
 {
     public static Dictionary<Vector3Int, Node> TileNode;
-    [SerializeField] private Tilemap maptilemap;
+    public Tilemap maptilemap;
     [SerializeField] private Vector3Int startingtile;
+    [SerializeField] private Vector3Int FromTestPath;
+    [SerializeField] private Vector3Int ToTestPath;
+    [SerializeField] private int overflowlimit;
+    
+
 
     private void Awake()
     {
-        
         Queue<Vector3Int> NodeQueue = new Queue<Vector3Int>();
         NodeQueue.Enqueue(startingtile);
         TileNode = new Dictionary<Vector3Int, Node>();
@@ -46,12 +51,11 @@ public class Pathfinder : MonoBehaviour
                     NodeQueue.Enqueue(actualnode+new Vector3Int(0,-1,0));
                     children.Add(actualnode+new Vector3Int(0,-1,0));
                 }
-                
                 TileNode.Add(actualnode, new Node(children, actualnode, null));
                 foreach (Vector3Int child in children)
                 {
                    
-                    Debug.DrawLine(maptilemap.layoutGrid.GetCellCenterWorld(actualnode), maptilemap.layoutGrid.GetCellCenterWorld(child), Color.white, 120);
+                    Debug.DrawLine(maptilemap.layoutGrid.GetCellCenterWorld(actualnode), maptilemap.layoutGrid.GetCellCenterWorld(child), Color.white, 10);
                     Debug.Log(child+" is Child of "+actualnode);
 
                 }
@@ -65,49 +69,85 @@ public class Pathfinder : MonoBehaviour
         
     }
 
-    public Stack<Vector3> Pathfind (Node From, Node To)
+    public Stack<Vector3> Pathfind (Vector3 From_world, Vector3 To_world)
     {
+        List<Node> usedNode = new List<Node>();
+        Node From = TileNode[maptilemap.layoutGrid.WorldToCell(From_world)];
+        Node To = TileNode[maptilemap.layoutGrid.WorldToCell(To_world)];
+        
         Queue<Node> NodeQueue = new Queue<Node>();
         NodeQueue.Enqueue(From);
-        
-        while (NodeQueue.Count > 1)
+        int overflowlevel = 0;
+        while (NodeQueue.Count > 0)
         {
+            overflowlevel++;
+            if (overflowlevel > overflowlimit)
+            {
+                Debug.Log("Overflow Limit");
+                return null;
+            }
             Node thisnode = NodeQueue.Dequeue();
-
+            Debug.Log("Actual Node is "+thisnode.position);
             if (thisnode.position != To.position)
             {
+                
                 foreach (Vector3Int child in thisnode.children)
                 {
-                    TileNode[child].parent = thisnode;
-                    NodeQueue.Enqueue(TileNode[child]);
+                    if (TileNode[child].parent == null)
+                    {
+                        TileNode[child].parent = thisnode;
+                        usedNode.Add(TileNode[child]);
+                        NodeQueue.Enqueue(TileNode[child]);
+                        Debug.Log("Adding Child to queue");
+                    }
                 }
             }
             else
             {
-                return ReversePathfind(thisnode, From);
+                //Debug.Log("Going to Reverse Path");
+                return ReversePathfind(thisnode, From, usedNode);
             }
 
         }
-        
+        Debug.Log("While end");
         return null;
     }
 
-    private Stack<Vector3> ReversePathfind(Node Target, Node Root)
+    public Stack<Vector3> ReversePathfind(Node Target, Node Root, List<Node> usedNode)
     {
         Stack<Vector3> path = new Stack<Vector3>();
         path.Push(maptilemap.layoutGrid.CellToWorld(Target.position));
+        Debug.DrawLine(maptilemap.layoutGrid.GetCellCenterWorld(Target.position), maptilemap.layoutGrid.GetCellCenterWorld(Target.parent.position), Color.red, 5);
         Node actualnode = Target.parent;
-        Debug.DrawLine(maptilemap.layoutGrid.GetCellCenterWorld(actualnode.position), maptilemap.layoutGrid.GetCellCenterWorld(Target.position), Color.red, 120);
+
 
 
         while (actualnode != Root)
         {
-            path.Push(maptilemap.layoutGrid.CellToWorld(actualnode.position));
+            Debug.Log("InReversePath with "+ actualnode.position);
+            path.Push(maptilemap.layoutGrid.GetCellCenterWorld(actualnode.position));
+            Debug.DrawLine(maptilemap.layoutGrid.GetCellCenterWorld(actualnode.position), maptilemap.layoutGrid.GetCellCenterWorld(actualnode.parent.position), Color.red, 5);
             actualnode = actualnode.parent;
-            Debug.DrawLine(maptilemap.layoutGrid.GetCellCenterWorld(actualnode.position), maptilemap.layoutGrid.GetCellCenterWorld(Target.position), Color.red, 120);
+            
 
+        }
+        
+        path.Push(maptilemap.layoutGrid.CellToWorld(actualnode.position));
+        actualnode.parent = null;
+        foreach (Node used in usedNode)
+        {
+            used.parent = null;
         }
         return path;
     }
+
+    public void PahtfindTest()
+    {
+        
+        Stack<Vector3> Waypoints = Pathfind(maptilemap.layoutGrid.GetCellCenterWorld(FromTestPath), maptilemap.layoutGrid.GetCellCenterWorld(ToTestPath));
+        Debug.Log("End of PathTest");
+    }
+
+    
 
 }
