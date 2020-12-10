@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 
 public class Pathfinder : MonoBehaviour
@@ -14,7 +16,10 @@ public class Pathfinder : MonoBehaviour
     [SerializeField] private Vector3Int FromTestPath;
     [SerializeField] private Vector3Int ToTestPath;
     [SerializeField] private int overflowlimit;
-    
+    [SerializeField] private GameObject ball;
+    [SerializeField] private GameObject energizer;
+    [SerializeField] private int energizerchance;
+    [SerializeField] private Vector3Int[] nospawnballzone;
 
 
     private void Awake()
@@ -52,6 +57,18 @@ public class Pathfinder : MonoBehaviour
                     children.Add(actualnode+new Vector3Int(0,-1,0));
                 }
                 TileNode.Add(actualnode, new Node(children, actualnode, null));
+                if (!nospawnballzone.Contains(actualnode) )
+                {
+                    if (Random.Range(0,101) <= energizerchance)
+                    {
+                        Instantiate(energizer, maptilemap.layoutGrid.GetCellCenterWorld(actualnode), transform.rotation);
+                    }
+                    else
+                    {
+                        Instantiate(ball, maptilemap.layoutGrid.GetCellCenterWorld(actualnode), transform.rotation);
+                    }
+                }
+
                 foreach (Vector3Int child in children)
                 {
                    
@@ -62,7 +79,7 @@ public class Pathfinder : MonoBehaviour
             }
             else
             {
-                Debug.Log("I am not the droid you are searching");
+                Debug.Log("Already visited");
             }
         }
         Debug.Log("PathConstructor end");
