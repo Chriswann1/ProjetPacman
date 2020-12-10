@@ -59,6 +59,11 @@ public class GameplayManager : MonoBehaviour
             life = 3;
         }
 
+        if (life <= 0)
+        {
+            life = 0;
+        }
+        
         switch (life)
         {
             case 4 :
