@@ -8,27 +8,17 @@ public class Player : MonoBehaviour
 {
 
     private GameObject ball;
-    
+    //public static int destroyedPacGum;
+
     //PlayerMovement
     public float speed;
     private bool onMovement;
     private Vector2 direction = Vector2.zero;
     
-    //LifePrinting
-    //public GameObject life1, life2, life3;
-    
-    //scoreManagement
-    public float score;
-    
-    //HealthManagement
-    public float life = 3;
-    
     // Start is called before the first frame update
     void Start()
     {
-        /*life1.gameObject.SetActive(true);
-        life2.gameObject.SetActive(true);
-        life3.gameObject.SetActive(true);*/
+        Reset();
     }
 
     // Update is called once per frame
@@ -37,49 +27,11 @@ public class Player : MonoBehaviour
         CheckInput();
         move();
         Orientation();
-
-        //Life system is 
-        /*if (life >= 3)
-        {
-            life = 3;
-        }
-
-        switch (life)
-        {
-            case 4 :
-                life1.gameObject.SetActive(true);
-                life2.gameObject.SetActive(true);
-                life3.gameObject.SetActive(true);
-                break;
-            case 3:
-                life1.gameObject.SetActive(true);
-                life2.gameObject.SetActive(true);
-                life3.gameObject.SetActive(false);
-                break;
-            case 2:
-                life1.gameObject.SetActive(true);
-                life2.gameObject.SetActive(false);
-                life3.gameObject.SetActive(false);
-                break;
-            case 1:
-                life1.gameObject.SetActive(false);
-                life2.gameObject.SetActive(false);
-                life3.gameObject.SetActive(false);
-                break;
-        }*/
     }
 
-    private void FixedUpdate()
+    private void Reset()
     {
-        
-        /*float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
- 
-        movement = new Vector3(moveHorizontal, moveVertical, 0f );
- 
-        movement = movement * speed * Time.deltaTime;
- 
-        transform.position += movement;*/
+        GameplayManager.Instance.destroyedPacGum = 0;
     }
 
     void CheckInput()
@@ -142,6 +94,12 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             GameplayManager.Instance.score += 10;
+            GameplayManager.Instance.destroyedPacGum += 1;
+            if (GameplayManager.Instance.destroyedPacGum == 5)
+            {
+                GameplayManager.Instance.ShowWin();
+                onMovement = false;
+            }
             //onMovement = true;
         }
         else if (other.gameObject.CompareTag("PowerBall"))
@@ -153,19 +111,13 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
-            GameplayManager.Instance.life -= 1;
+            GameplayManager.Instance.ShowGameOver();
+            //GameplayManager.Instance.life -= 1;
         }
         else
         {
             onMovement = false;
         }
     }
-
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Map"))
-        {
-            
-        }
-    }*/
+    
 }
