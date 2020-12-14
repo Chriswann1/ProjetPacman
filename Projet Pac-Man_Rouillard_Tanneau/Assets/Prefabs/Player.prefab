@@ -145,6 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  targetworld: {x: 0, y: 0, z: 0}
+  scoretowin: 200
   score: 0
   life: 3
 --- !u!95 &3989359517989705175
