@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
@@ -11,125 +9,100 @@ public class Player : MonoBehaviour
     
     //PlayerMovement
     public float speed;
-    private bool onMovement;
-    private Vector2 direction = Vector2.zero;
+
+    private Vector3Int direction = Vector3Int.zero;
+    private Vector3Int currentdirection =  Vector3Int.zero;
+    private Vector3Int target = Vector3Int.zero;
+    private Vector3Int actualtilepos = Vector3Int.zero;
+    private Tilemap tilemap;
+    public Vector3 targetworld = Vector3.zero;
     
-    //LifePrinting
-    //public GameObject life1, life2, life3;
     
+    private bool inmovement = false;
+    private float starttime;
+    private float lerppos = 0;
+
+
+
     //scoreManagement
     public float score;
     
     //HealthManagement
     public float life = 3;
     
-    // Start is called before the first frame update
-    void Start()
+    // Update is called once per frame
+
+    private void Awake()
     {
-        /*life1.gameObject.SetActive(true);
-        life2.gameObject.SetActive(true);
-        life3.gameObject.SetActive(true);*/
+        tilemap = GameObject.FindWithTag("GameplayManager").GetComponent<Pathfinder>().maptilemap;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        
+        actualtilepos = target;
         CheckInput();
-        move();
-        Orientation();
-
-        //Life system is 
-        /*if (life >= 3)
+        lerppos = (Time.time - starttime) * speed;
+        transform.position = Vector3.Lerp(tilemap.layoutGrid.GetCellCenterWorld(actualtilepos), tilemap.layoutGrid.GetCellCenterWorld(target), lerppos);
+        if (lerppos >= 1f)
         {
-            life = 3;
+            inmovement = false;
+            this.GetComponent<Animator>().SetBool("movement", false);
         }
 
-        switch (life)
-        {
-            case 4 :
-                life1.gameObject.SetActive(true);
-                life2.gameObject.SetActive(true);
-                life3.gameObject.SetActive(true);
-                break;
-            case 3:
-                life1.gameObject.SetActive(true);
-                life2.gameObject.SetActive(true);
-                life3.gameObject.SetActive(false);
-                break;
-            case 2:
-                life1.gameObject.SetActive(true);
-                life2.gameObject.SetActive(false);
-                life3.gameObject.SetActive(false);
-                break;
-            case 1:
-                life1.gameObject.SetActive(false);
-                life2.gameObject.SetActive(false);
-                life3.gameObject.SetActive(false);
-                break;
-        }*/
-    }
 
-    private void FixedUpdate()
-    {
-        
-        /*float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
- 
-        movement = new Vector3(moveHorizontal, moveVertical, 0f );
- 
-        movement = movement * speed * Time.deltaTime;
- 
-        transform.position += movement;*/
+
     }
 
     void CheckInput()
     {
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        float vertical = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        direction = new Vector3Int(Mathf.RoundToInt(horizontal),Mathf.RoundToInt(vertical),0);
+
+        if (direction.x != 0 && direction.y != 0)
         {
-            direction = Vector2.left;
-            onMovement = true;
-        }else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            direction = Vector2.right;
-            onMovement = true;
-        }else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            direction = Vector2.up;
-            onMovement = true;
-        }else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            direction = Vector2.down;
-            onMovement = true;
+            direction.y = 0;
         }
+
+        if (!tilemap.GetTile(actualtilepos + direction) && direction != Vector3Int.zero)
+        {
+            currentdirection = direction;
+        }
+
+        if (!inmovement && !tilemap.GetTile(actualtilepos + currentdirection))
+        {
+            starttime = Time.time;
+            target = actualtilepos + currentdirection;
+            targetworld = tilemap.layoutGrid.GetCellCenterWorld(target);
+            inmovement = true;
+            this.GetComponent<Animator>().SetBool("movement", true);
+            Orientation();
+        }
+        
+        
+
        
     }
-
-    void move()
-    {
-        if (onMovement == true)
-        {
-            transform.localPosition += (Vector3) (direction * speed) * Time.deltaTime;
-        }
-    }
-
+    
     void Orientation()
     {
-        if (direction == Vector2.left)
+        if (currentdirection == Vector3Int.left)
         {
             transform.localScale = new Vector3(-1,-1,1);
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (direction == Vector2.right)
+        else if (currentdirection == Vector3Int.right)
         {
             transform.localScale = new Vector3(1,1,1);
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (direction == Vector2.up)
+        else if (currentdirection == Vector3Int.up)
         {
             transform.localScale = new Vector3(1,1,1);
             transform.localRotation = Quaternion.Euler(0, 0, 90);
         }
-        else if (direction == Vector2.down)
+        else if (currentdirection == Vector3Int.down)
         {
             transform.localScale = new Vector3(1,1,1);
             transform.localRotation = Quaternion.Euler(0, 0, 270);
@@ -155,17 +128,6 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
             GameplayManager.Instance.life -= 1;
         }
-        else
-        {
-            onMovement = false;
-        }
-    }
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Map"))
-        {
-            
-        }
-    }*/
+    }
 }

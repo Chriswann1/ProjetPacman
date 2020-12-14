@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Ball
+  - PowerBall
+  - GameplayManager
   layers:
   - Default
   - TransparentFX
