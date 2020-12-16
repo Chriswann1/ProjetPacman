@@ -97,9 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45be2b50555f4c4ebf59a9fa19b19e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActualBehaviour: 0
   reflex: 0.2
   speed: 1
   starttime: 3
+  PointToStart: 600
   _pathfinder: {fileID: 0}
 --- !u!95 &-4984876636685875615
 Animator:

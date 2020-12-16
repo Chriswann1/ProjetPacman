@@ -16,6 +16,7 @@ public class Pathfinder : MonoBehaviour
     [SerializeField] private GameObject energizer;
     [SerializeField] private int energizerchance;
     [SerializeField] private Vector3Int enemyspawndoor;
+    [SerializeField] private Vector3Int[] portals;
     private bool inbase = true;
 
 
@@ -58,7 +59,7 @@ public class Pathfinder : MonoBehaviour
                     children.Add(actualnode+new Vector3Int(0,-1,0));
                 }
                 TileNode.Add(actualnode, new Node(children, actualnode, null));
-                if (!inbase)
+                if (!inbase && actualnode != this.GetComponent<GameplayManager>().spawn && !portals.Contains(actualnode))
                 {
                     if (Random.Range(0,101) <= energizerchance)
                     {
@@ -69,6 +70,7 @@ public class Pathfinder : MonoBehaviour
                         Instantiate(ball, maptilemap.layoutGrid.GetCellCenterWorld(actualnode), transform.rotation);
                     }
                 }
+                
 
                 foreach (Vector3Int child in children)
                 {
@@ -84,8 +86,7 @@ public class Pathfinder : MonoBehaviour
             }
         }
         Debug.Log("PathConstructor end");
-        
-        //StartCoroutine(constructor());
+
     }
 
     public Stack<Vector3> Pathfind (Vector3 From_world, Vector3 To_world)
@@ -104,14 +105,14 @@ public class Pathfinder : MonoBehaviour
                 overflowlevel++;
                 if (overflowlevel > overflowlimit)
                 {
-                    //Debug.Log("Overflow Limit");
-                    return null;
+                    Debug.Log("Overflow Limit");
+                    Resetparent(usedNode);
+                    return new Stack<Vector3>();
                 }
                 Node thisnode = NodeQueue.Dequeue();
                 //Debug.Log("Actual Node is "+thisnode.position);
                 if (thisnode.position != To.position)
                 {
-                
                     foreach (Vector3Int child in thisnode.children)
                     {
                         if (TileNode[child].parent == null)
@@ -130,11 +131,14 @@ public class Pathfinder : MonoBehaviour
                 }
 
             }
-            //Debug.Log("While end");
-            return null;
+            Debug.Log("While end without reaching target");
+            Resetparent(usedNode);
+            return new Stack<Vector3>();
         }
         else
         {
+            Debug.Log("Don't contain");
+            Resetparent(usedNode);
             return new Stack<Vector3>();
         }
 
@@ -144,6 +148,7 @@ public class Pathfinder : MonoBehaviour
     {
         if (Target == Root)
         {
+            Resetparent(usedNode);
             return new Stack<Vector3>();
         }
         Stack<Vector3> path = new Stack<Vector3>();
@@ -163,13 +168,18 @@ public class Pathfinder : MonoBehaviour
 
         }
         
-        //path.Push(maptilemap.layoutGrid.GetCellCenterWorld(actualnode.position));
+      
         actualnode.parent = null;
+        Resetparent(usedNode);
+        return path;
+    }
+
+    void Resetparent(List<Node> usedNode)
+    {
         foreach (Node used in usedNode)
         {
             used.parent = null;
         }
-        return path;
     }
 
     

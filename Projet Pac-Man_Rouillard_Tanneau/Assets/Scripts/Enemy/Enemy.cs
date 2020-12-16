@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,14 +14,18 @@ public class Enemy : MonoBehaviour
         Fleeing
         
     }
-    private BehaviourAI ActualBehaviour = BehaviourAI.Idle;
+    public BehaviourAI ActualBehaviour = BehaviourAI.Idle;
 
     private Stack<Vector3> waypoints;
     private Vector3 nextwaypoint;
+    
     [SerializeField] private float reflex;
     [SerializeField] private float speed;
-    [SerializeField] private float starttime;
+    [SerializeField] private int PointToStart;
+    
+    public int id;
     protected Vector3 target;
+    
     
 
     [SerializeField]
@@ -34,6 +40,7 @@ public class Enemy : MonoBehaviour
     
     public virtual void Update()
     {
+
         if (waypoints.Count > 0)
         {
             if (transform.position != nextwaypoint && nextwaypoint != Vector3.zero)
@@ -47,6 +54,15 @@ public class Enemy : MonoBehaviour
                 nextwaypoint = waypoints.Pop();
             }
         }
+        
+        if (GameplayManager.Instance.fear == true)
+        {
+            ActualBehaviour = BehaviourAI.Fleeing;
+            this.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+
+
+
     }
 
     public virtual IEnumerator FindPath()
@@ -59,25 +75,53 @@ public class Enemy : MonoBehaviour
                     Debug.Log("In Attack");
                     if (target != Vector3.zero)
                     {
-                        waypoints.Clear();
-                        waypoints = _pathfinder.Pathfind(transform.position, target);
 
+                        waypoints = _pathfinder.Pathfind(transform.position, target);
+                        Debug.Log("Target is "+target);
                     }
                     yield return new WaitForSeconds(reflex);
                     break;
-                
                 case BehaviourAI.Fleeing:
+                    target = _pathfinder.maptilemap.layoutGrid.GetCellCenterWorld(Pathfinder.TileNode.Keys.ToArray()[Random.Range(0, Pathfinder.TileNode.Keys.Count-1)]);
+                    waypoints = _pathfinder.Pathfind(transform.position, target);
+                    Debug.Log("Target is "+target);
                     
-                    yield return new WaitForSeconds(reflex);
+                    if (GameplayManager.Instance.fear == false)
+                    {
+                        ActualBehaviour = BehaviourAI.Attacking;
+                        this.GetComponent<SpriteRenderer>().color = Color.white;
+                    }
+
+                    yield return new WaitForSeconds(reflex+1);
                     break;
-                
                 case BehaviourAI.Idle:
                     Debug.Log("In Idle");
-                    yield return new WaitForSeconds(starttime);
-                    ActualBehaviour = BehaviourAI.Attacking;
+                    if (GameplayManager.Instance.score > PointToStart)
+                    {
+                        ActualBehaviour = BehaviourAI.Attacking;
+                    }
+                    yield return new WaitForSeconds(reflex);
                     break;
+            }
+        }
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (!GameplayManager.Instance.fear)
+            {
+                Destroy(other.gameObject);
+                GameplayManager.Instance.ShowGameOver();
                 
+            }
+            else
+            {
+                GameplayManager.Instance.score += 50;
+                GameplayManager.Instance.RespawnEnemy(id);
+                Destroy(this.gameObject);
+
             }
         }
     }

@@ -123,9 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec0f4ce54132ba41b68a815a9a6d569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActualBehaviour: 0
   reflex: 0.1
   speed: 1
   starttime: 5
+  PointToStart: 300
   _pathfinder: {fileID: 0}
 --- !u!95 &2121182480860816059
 Animator:

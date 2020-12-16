@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,16 +11,18 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager Instance;
     public int life;
     public GameObject player;
+    public Vector3Int spawn;
 
-    public GameObject[] enemies;
+    [SerializeField] private GameObject[] enemiesPref;
+    [SerializeField] private GameObject enemy;
+    [SerializeField] private Vector3Int[] spawnpos;
     
     //Panel GameOver and Winning
     public GameObject panelWinning;
     public GameObject panelGameOver;
     
     public Text finalScoreTxt;
-    public Text finalScoreWinTxt
-        ;
+    public Text finalScoreWinTxt;
     public Text gameTimeTxt;
     public Text gameTimeWinTxt;
     
@@ -41,6 +46,11 @@ public class GameplayManager : MonoBehaviour
     private float startTime;
     private bool completedParty = false;
 
+
+    public bool fear = false;
+    [SerializeField] private float feartime;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +58,13 @@ public class GameplayManager : MonoBehaviour
         life2.gameObject.SetActive(true);
         life3.gameObject.SetActive(true);
         
-        Instantiate(player, transform.position, transform.rotation);
+        Instantiate(player, this.GetComponent<Pathfinder>().maptilemap.layoutGrid.GetCellCenterWorld(spawn), transform.rotation).GetComponent<Player>().target = spawn;
+        for (int i = 0; i < enemiesPref.Length; i++)
+        {
+            enemy = Instantiate(enemiesPref[i], this.GetComponent<Pathfinder>().maptilemap.layoutGrid.GetCellCenterWorld(spawnpos[i]), transform.rotation);
+            enemy.GetComponent<Enemy>().id = i;
+        }
+        
         //player.transform.localScale = new Vector3(2,2,0);
         
         //Time printing
@@ -125,6 +141,22 @@ public class GameplayManager : MonoBehaviour
                 life3.gameObject.SetActive(false);
                 break;
         }
+    }
+
+    public IEnumerator FearPower()
+    {
+        fear = true;
+        yield return new WaitForSeconds(feartime);
+        fear = false;
+
+        yield return null;
+    }
+
+    public void RespawnEnemy(int id)
+    {
+        GameObject spawned = Instantiate(enemiesPref[id], this.GetComponent<Pathfinder>().maptilemap.layoutGrid.GetCellCenterWorld(spawnpos[id]), transform.rotation);
+        spawned.GetComponent<Enemy>().id = id;
+
     }
 
     public void ShowWin()

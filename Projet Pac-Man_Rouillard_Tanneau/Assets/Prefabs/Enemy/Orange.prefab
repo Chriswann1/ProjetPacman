@@ -97,9 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bafdda75e13947f4aa67f34bc1b54f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflex: 0.5
+  ActualBehaviour: 0
+  reflex: 5
   speed: 1
   starttime: 6
+  PointToStart: 400
   _pathfinder: {fileID: 0}
 --- !u!61 &6735671793200502452
 BoxCollider2D:
