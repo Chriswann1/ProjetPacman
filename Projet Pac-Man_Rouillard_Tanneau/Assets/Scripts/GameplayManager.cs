@@ -34,27 +34,37 @@ public class GameplayManager : MonoBehaviour
     //LifePrinting
     public GameObject life1, life2, life3;
     
-    //Score
-    public float score;
+    //Score and save score
+
+    [SerializeField] private int lastScore = 0;
+    public Text lastScoreTxt;
+    public int score;
     public Text scoreTxt;
     
     //TimePrinting and Management 
     public Text timerText;
     private float startTime;
     private bool completedParty = false;
+    
+    //Sound
+
+    public AudioClip defeatSound;
+    public AudioSource audioSource;
+    public AudioClip victorySound;
 
     // Start is called before the first frame update
     void Start()
     {
+        SaveScore();
         life1.gameObject.SetActive(true);
         life2.gameObject.SetActive(true);
         life3.gameObject.SetActive(true);
         
         Instantiate(player, transform.position, transform.rotation);
-        //player.transform.localScale = new Vector3(2,2,0);
-        
+
         //Time printing
         startTime = Time.time;
+        
     }
     
     void Awake()
@@ -90,6 +100,7 @@ public class GameplayManager : MonoBehaviour
         }
         if (player != null) { 
             scoreTxt.text = "Score : " + score;
+            lastScoreTxt.text = "Dernier score : " + lastScore;
         }
         
         //We well prevent that the life be upper than 3
@@ -129,12 +140,30 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    public void Mute()
+    {
+        AudioListener.pause = !AudioListener.pause;
+    }
+
+    public void SaveScore()
+    {
+        //This function will recover the score Set in Player's script for the PlayerPrefs
+        if (PlayerPrefs.HasKey("Score"))
+        {
+            lastScore = PlayerPrefs.GetInt("Score");
+            Debug.Log("Score chargé");
+        }
+    }
+
     public void ShowWin()
     {
+        panelWinning.SetActive(true);
+        //A winning sound will be played when the player will win the party
+        audioSource.PlayOneShot(victorySound);
+        
         gumDestroyedWin = destroyedPacGum;
         pacGumWinTxt.text = " PacGums : " + gumDestroyedWin;
-        
-        panelWinning.SetActive(true);
+
         finalScoreWinTxt.text = "Score Final : " + score;
         completedParty = true;
         //gameTimeTxt.text = "Temps de jeu : " + timerText.text;
@@ -150,6 +179,9 @@ public class GameplayManager : MonoBehaviour
     {
         panelGameOver.SetActive(true);
 
+        //A game over sound will be played when the player will be destroy
+        audioSource.PlayOneShot(defeatSound);
+        
         gumDestroyed = destroyedPacGum;
         pacGumTxt.text = " PacGums : " + gumDestroyed;
 

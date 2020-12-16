@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : MonoBehaviour
 {
@@ -97,6 +98,9 @@ public class Player : MonoBehaviour
             GameplayManager.Instance.destroyedPacGum += 1;
             if (GameplayManager.Instance.destroyedPacGum == 5)
             {
+                //Set score for the save of it
+                PlayerPrefs.SetInt("Score", GameplayManager.Instance.score);
+                Debug.Log("Score saved");
                 GameplayManager.Instance.ShowWin();
                 onMovement = false;
             }
@@ -111,6 +115,11 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
+            
+            //Set score for the save of it
+            PlayerPrefs.SetInt("Score", GameplayManager.Instance.score);
+            Debug.Log("Score saved");
+            
             GameplayManager.Instance.ShowGameOver();
             //GameplayManager.Instance.life -= 1;
         }
