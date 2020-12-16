@@ -1,9 +1,13 @@
-﻿using System;
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+
 
 public class Player : MonoBehaviour
 {
@@ -13,85 +17,114 @@ public class Player : MonoBehaviour
 
     //PlayerMovement
     public float speed;
-    private bool onMovement;
-    private Vector2 direction = Vector2.zero;
-    
+
+    private Vector3Int direction = Vector3Int.zero;
+    private Vector3Int currentdirection = Vector3Int.zero;
+    private Vector3Int target = Vector3Int.zero;
+    private Vector3Int actualtilepos = Vector3Int.zero;
+    private Tilemap tilemap;
+    public Vector3 targetworld = Vector3.zero;
+    [SerializeField] private int scoretowin;
+    private bool inmovement = false;
+    private float starttime;
+    private float lerppos = 0;
+
+
+
+    //scoreManagement
+    public float score;
+
+    //HealthManagement
+    public float life = 3;
+
+    // Update is called once per frame
+
+    private void Awake()
+    {
+        tilemap = GameObject.FindWithTag("GameplayManager").GetComponent<Pathfinder>().maptilemap;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         Reset();
+
     }
 
-    // Update is called once per frame
     void Update()
     {
+
+        actualtilepos = target;
         CheckInput();
-        move();
-        Orientation();
+        lerppos = (Time.time - starttime) * speed;
+        transform.position = Vector3.Lerp(tilemap.layoutGrid.GetCellCenterWorld(actualtilepos), tilemap.layoutGrid.GetCellCenterWorld(target), lerppos);
+        if (lerppos >= 1f)
+        {
+            inmovement = false;
+            this.GetComponent<Animator>().SetBool("movement", false);
+        }
+        
     }
 
-    private void Reset()
+    void Reset()
     {
         GameplayManager.Instance.destroyedPacGum = 0;
     }
 
     void CheckInput()
     {
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            direction = Vector2.left;
-            onMovement = true;
-        }else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            direction = Vector2.right;
-            onMovement = true;
-        }else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            direction = Vector2.up;
-            onMovement = true;
-        }else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            direction = Vector2.down;
-            onMovement = true;
-        }
-       
-    }
+        float vertical = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        direction = new Vector3Int(Mathf.RoundToInt(horizontal), Mathf.RoundToInt(vertical), 0);
 
-    void move()
-    {
-        if (onMovement == true)
-        {
-            transform.localPosition += (Vector3) (direction * speed) * Time.deltaTime;
+        if (direction.x != 0 && direction.y != 0)
+        { 
+            direction.y = 0;
         }
+
+        if (!tilemap.GetTile(actualtilepos + direction) && direction != Vector3Int.zero)
+        { 
+            currentdirection = direction;
+        }
+
+        if (!inmovement && !tilemap.GetTile(actualtilepos + currentdirection))
+        {
+            starttime = Time.time;
+            target = actualtilepos + currentdirection; 
+            targetworld = tilemap.layoutGrid.GetCellCenterWorld(target); 
+            inmovement = true;
+            this.GetComponent<Animator>().SetBool("movement", true);
+            Orientation();
+            }
     }
 
     void Orientation()
     {
-        if (direction == Vector2.left)
+        if (currentdirection == Vector3Int.left)
         {
-            transform.localScale = new Vector3(-1,-1,1);
+            transform.localScale = new Vector3(-1, -1, 1);
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (direction == Vector2.right)
+        else if (currentdirection == Vector3Int.right)
         {
-            transform.localScale = new Vector3(1,1,1);
+            transform.localScale = new Vector3(1, 1, 1);
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (direction == Vector2.up)
+        else if (currentdirection == Vector3Int.up)
         {
-            transform.localScale = new Vector3(1,1,1);
+            transform.localScale = new Vector3(1, 1, 1);
             transform.localRotation = Quaternion.Euler(0, 0, 90);
         }
-        else if (direction == Vector2.down)
+        else if (currentdirection == Vector3Int.down)
         {
-            transform.localScale = new Vector3(1,1,1);
+            transform.localScale = new Vector3(1, 1, 1);
             transform.localRotation = Quaternion.Euler(0, 0, 270);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag ("Ball"))
+        if (other.gameObject.CompareTag("Ball"))
         {
             Destroy(other.gameObject);
             GameplayManager.Instance.score += 10;
@@ -101,8 +134,9 @@ public class Player : MonoBehaviour
                 //Set score for the save of it
                 PlayerPrefs.SetInt("Score", GameplayManager.Instance.score);
                 Debug.Log("Score saved");
+            if (GameplayManager.Instance.destroyedPacGum >= scoretowin)
+            { 
                 GameplayManager.Instance.ShowWin();
-                onMovement = false;
             }
             //onMovement = true;
         }
@@ -125,8 +159,22 @@ public class Player : MonoBehaviour
         }
         else
         {
-            onMovement = false;
+            inmovement = false;
         }
+
+                //onMovement = true;
+            }
+            else if (other.gameObject.CompareTag("PowerBall"))
+            {
+                Destroy(other.gameObject);
+                GameplayManager.Instance.score += 50;
+            }
+            else if (other.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(other.gameObject);
+                Destroy(this.gameObject);
+                GameplayManager.Instance.ShowGameOver();
+                //GameplayManager.Instance.life -= 1;
+            }
     }
-    
 }
