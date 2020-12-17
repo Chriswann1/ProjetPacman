@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Linq;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -64,8 +62,6 @@ public class GameplayManager : MonoBehaviour
             enemy = Instantiate(enemiesPref[i], this.GetComponent<Pathfinder>().maptilemap.layoutGrid.GetCellCenterWorld(spawnpos[i]), transform.rotation);
             enemy.GetComponent<Enemy>().id = i;
         }
-        
-        //player.transform.localScale = new Vector3(2,2,0);
         
         //Time printing
         startTime = Time.time;
