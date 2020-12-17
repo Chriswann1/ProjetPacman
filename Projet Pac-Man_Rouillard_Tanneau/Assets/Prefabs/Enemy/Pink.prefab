@@ -141,7 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9b08b8a0b9f57469502c1a071a24ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActualBehaviour: 0
   reflex: 0.3
   speed: 1
   starttime: 4
+  PointToStart: 500
   _pathfinder: {fileID: 0}

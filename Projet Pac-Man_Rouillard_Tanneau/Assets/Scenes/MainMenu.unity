@@ -187,72 +187,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &35402282
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 35402284}
-  - component: {fileID: 35402283}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &35402283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35402282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f11976a00ba0ea4c97f8da7a7605bee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 0
-  player: {fileID: 7680722994674414043, guid: 090266ef42a93254fa0e28779ecb5e58, type: 3}
-  enemies: []
-  panelWinning: {fileID: 0}
-  panelGameOver: {fileID: 0}
-  finalScoreTxt: {fileID: 0}
-  finalScoreWinTxt: {fileID: 0}
-  gameTimeTxt: {fileID: 0}
-  gameTimeWinTxt: {fileID: 0}
-  pacGumTxt: {fileID: 0}
-  pacGumWinTxt: {fileID: 0}
-  destroyedPacGum: 0
-  life1: {fileID: 0}
-  life2: {fileID: 0}
-  life3: {fileID: 0}
-  lastScore: 0
-  lastScoreTxt: {fileID: 0}
-  score: 0
-  scoreTxt: {fileID: 0}
-  timerText: {fileID: 0}
-  defeatSound: {fileID: 0}
-  audioSource: {fileID: 0}
-  victorySound: {fileID: 0}
---- !u!4 &35402284
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35402282}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1465.8883, y: 166.31374, z: -113.223724}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &48347023
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,6 +750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a401efbde0a16ea40be583cfef5847f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 1159746866}
+  introSound: {fileID: 8300000, guid: 1efd2c808946f584eab7b4f4981344bb, type: 3}
 --- !u!4 &660043405
 Transform:
   m_ObjectHideFlags: 0
@@ -2431,7 +2367,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 35402283}
+      - m_Target: {fileID: 0}
         m_MethodName: Mute
         m_Mode: 1
         m_Arguments:

@@ -1,13 +1,6 @@
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
 
 public class Player : MonoBehaviour
 {
@@ -20,7 +13,7 @@ public class Player : MonoBehaviour
 
     private Vector3Int direction = Vector3Int.zero;
     private Vector3Int currentdirection = Vector3Int.zero;
-    private Vector3Int target = Vector3Int.zero;
+    public Vector3Int target = Vector3Int.zero;
     private Vector3Int actualtilepos = Vector3Int.zero;
     private Tilemap tilemap;
     public Vector3 targetworld = Vector3.zero;
@@ -28,6 +21,8 @@ public class Player : MonoBehaviour
     private bool inmovement = false;
     private float starttime;
     private float lerppos = 0;
+    [SerializeField] private Vector3Int[] portals;
+    [SerializeField] private AudioClip powersound;
 
 
 
@@ -35,7 +30,7 @@ public class Player : MonoBehaviour
     public float score;
 
     //HealthManagement
-    public float life = 3;
+    //public float life = 3;
 
     // Update is called once per frame
 
@@ -53,7 +48,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
         actualtilepos = target;
         CheckInput();
         lerppos = (Time.time - starttime) * speed;
@@ -63,7 +57,6 @@ public class Player : MonoBehaviour
             inmovement = false;
             this.GetComponent<Animator>().SetBool("movement", false);
         }
-        
     }
 
     void Reset()
@@ -90,7 +83,23 @@ public class Player : MonoBehaviour
         if (!inmovement && !tilemap.GetTile(actualtilepos + currentdirection))
         {
             starttime = Time.time;
-            target = actualtilepos + currentdirection; 
+            if (actualtilepos + currentdirection == portals[0])
+            {
+                target = portals[1] + Vector3Int.left;
+                transform.position = tilemap.layoutGrid.GetCellCenterWorld(portals[1]);
+                direction = Vector3Int.left;
+                currentdirection = Vector3Int.left;
+            }else if (actualtilepos + currentdirection == portals[1])
+            {
+                target = portals[0] + Vector3Int.right;
+                transform.position = tilemap.layoutGrid.GetCellCenterWorld(portals[0]);
+                direction = Vector3Int.right;
+                currentdirection = Vector3Int.right;
+            }
+            else
+            { 
+                target = actualtilepos + currentdirection; 
+            }
             targetworld = tilemap.layoutGrid.GetCellCenterWorld(target); 
             inmovement = true;
             this.GetComponent<Animator>().SetBool("movement", true);
@@ -129,38 +138,10 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
             GameplayManager.Instance.score += 10;
             GameplayManager.Instance.destroyedPacGum += 1;
-            if (GameplayManager.Instance.destroyedPacGum == 5)
-            {
-                //Set score for the save of it
-                PlayerPrefs.SetInt("Score", GameplayManager.Instance.score);
-                Debug.Log("Score saved");
             if (GameplayManager.Instance.destroyedPacGum >= scoretowin)
             { 
                 GameplayManager.Instance.ShowWin();
             }
-            //onMovement = true;
-        }
-        else if (other.gameObject.CompareTag("PowerBall"))
-        {
-            Destroy(other.gameObject);
-            GameplayManager.Instance.score += 50;
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(other.gameObject);
-            Destroy(this.gameObject);
-            
-            //Set score for the save of it
-            PlayerPrefs.SetInt("Score", GameplayManager.Instance.score);
-            Debug.Log("Score saved");
-            
-            GameplayManager.Instance.ShowGameOver();
-            //GameplayManager.Instance.life -= 1;
-        }
-        else
-        {
-            inmovement = false;
-        }
 
                 //onMovement = true;
             }
@@ -168,13 +149,10 @@ public class Player : MonoBehaviour
             {
                 Destroy(other.gameObject);
                 GameplayManager.Instance.score += 50;
-            }
-            else if (other.gameObject.CompareTag("Enemy"))
-            {
-                Destroy(other.gameObject);
-                Destroy(this.gameObject);
-                GameplayManager.Instance.ShowGameOver();
-                //GameplayManager.Instance.life -= 1;
+                this.GetComponent<AudioSource>().clip = powersound;
+                this.GetComponent<AudioSource>().Play();
+                StartCoroutine(GameplayManager.Instance.FearPower());
             }
     }
+    
 }
