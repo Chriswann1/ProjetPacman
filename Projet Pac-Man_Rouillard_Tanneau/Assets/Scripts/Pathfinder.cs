@@ -18,6 +18,8 @@ public class Pathfinder : MonoBehaviour
     [SerializeField] private Vector3Int enemyspawndoor;
     [SerializeField] private Vector3Int[] portals;
     private bool inbase = true;
+    public int ballsnumber;
+    
 
 
     private void Awake()
@@ -68,6 +70,8 @@ public class Pathfinder : MonoBehaviour
                     else
                     {
                         Instantiate(ball, maptilemap.layoutGrid.GetCellCenterWorld(actualnode), transform.rotation);
+                        ballsnumber++;
+
                     }
                 }
                 
@@ -105,8 +109,12 @@ public class Pathfinder : MonoBehaviour
                 overflowlevel++;
                 if (overflowlevel > overflowlimit)
                 {
+
+                    //Debug.Log("Overflow Limit");
+
                     Debug.Log("Overflow Limit");
                     Resetparent(usedNode);
+
                     return new Stack<Vector3>();
                 }
                 Node thisnode = NodeQueue.Dequeue();
@@ -131,8 +139,12 @@ public class Pathfinder : MonoBehaviour
                 }
 
             }
+
+            //Debug.Log("While end");
+
             Debug.Log("While end without reaching target");
             Resetparent(usedNode);
+
             return new Stack<Vector3>();
         }
         else

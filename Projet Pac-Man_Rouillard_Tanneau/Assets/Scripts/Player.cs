@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
     public float score;
 
     //HealthManagement
-    public float life = 3;
+    //public float life = 3;
 
     // Update is called once per frame
 
@@ -41,13 +42,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         Reset();
 
     }
 
     void Update()
     {
-
         actualtilepos = target;
         CheckInput();
         lerppos = (Time.time - starttime) * speed;
@@ -57,7 +58,6 @@ public class Player : MonoBehaviour
             inmovement = false;
             this.GetComponent<Animator>().SetBool("movement", false);
         }
-        
     }
 
     void Reset()
@@ -86,8 +86,6 @@ public class Player : MonoBehaviour
             starttime = Time.time;
             if (actualtilepos + currentdirection == portals[0])
             {
-
-
                 target = portals[1] + Vector3Int.left;
                 transform.position = tilemap.layoutGrid.GetCellCenterWorld(portals[1]);
                 direction = Vector3Int.left;
@@ -100,19 +98,14 @@ public class Player : MonoBehaviour
                 currentdirection = Vector3Int.right;
             }
             else
-            {
+            { 
                 target = actualtilepos + currentdirection; 
             }
-
             targetworld = tilemap.layoutGrid.GetCellCenterWorld(target); 
             inmovement = true;
             this.GetComponent<Animator>().SetBool("movement", true);
             Orientation();
             }
-
-
-
-
     }
 
     void Orientation()
@@ -146,30 +139,17 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
             GameplayManager.Instance.score += 10;
             GameplayManager.Instance.destroyedPacGum += 1;
-            if (GameplayManager.Instance.destroyedPacGum >= scoretowin)
-            { 
-                GameplayManager.Instance.ShowWin();
-            }
-
-                //onMovement = true;
-            }
-            else if (other.gameObject.CompareTag("PowerBall"))
-            {
-                Destroy(other.gameObject);
-                GameplayManager.Instance.score += 50;
-                this.GetComponent<AudioSource>().clip = powersound;
-                this.GetComponent<AudioSource>().Play();
-                StartCoroutine(GameplayManager.Instance.FearPower());
-            }
-
-
-
-
-
-
+            GameplayManager.Instance.remainingpoints--;
+            
+        }
+        else if (other.gameObject.CompareTag("PowerBall"))
+        { 
+            Destroy(other.gameObject); 
+            GameplayManager.Instance.score += 50; 
+            this.GetComponent<AudioSource>().clip = powersound; 
+            this.GetComponent<AudioSource>().Play(); 
+            StartCoroutine(GameplayManager.Instance.FearPower());
+        }
     }
-
-
     
-
 }
