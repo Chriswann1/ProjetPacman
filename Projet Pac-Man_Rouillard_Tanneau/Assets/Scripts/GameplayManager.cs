@@ -213,6 +213,10 @@ public class GameplayManager : MonoBehaviour
         string minutes = ((int) t / 60).ToString();
         string seconds = (t % 60).ToString("f1");
         gameTimeTxt.text = "Temps de jeu :  " + minutes + ":" + seconds;
+        if (score > lastScore)
+        {
+            PlayerPrefs.SetInt("Score", score);
+        }
     }
 
     public void Setplayeractive()
