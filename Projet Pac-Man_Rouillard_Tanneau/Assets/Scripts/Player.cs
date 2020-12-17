@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         Reset();
 
     }
@@ -138,21 +139,17 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
             GameplayManager.Instance.score += 10;
             GameplayManager.Instance.destroyedPacGum += 1;
-            if (GameplayManager.Instance.destroyedPacGum >= scoretowin)
-            { 
-                GameplayManager.Instance.ShowWin();
-            }
-
-                //onMovement = true;
-            }
-            else if (other.gameObject.CompareTag("PowerBall"))
-            {
-                Destroy(other.gameObject);
-                GameplayManager.Instance.score += 50;
-                this.GetComponent<AudioSource>().clip = powersound;
-                this.GetComponent<AudioSource>().Play();
-                StartCoroutine(GameplayManager.Instance.FearPower());
-            }
+            GameplayManager.Instance.remainingpoints--;
+            
+        }
+        else if (other.gameObject.CompareTag("PowerBall"))
+        { 
+            Destroy(other.gameObject); 
+            GameplayManager.Instance.score += 50; 
+            this.GetComponent<AudioSource>().clip = powersound; 
+            this.GetComponent<AudioSource>().Play(); 
+            StartCoroutine(GameplayManager.Instance.FearPower());
+        }
     }
     
 }
