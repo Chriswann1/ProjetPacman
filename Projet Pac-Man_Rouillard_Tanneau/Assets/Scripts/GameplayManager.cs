@@ -8,7 +8,7 @@ public class GameplayManager : MonoBehaviour
 
     public static GameplayManager Instance;
     public int life;
-    public GameObject player;
+    public GameObject playerpref;
     public Vector3Int spawn;
 
     [SerializeField] private GameObject[] enemiesPref;
@@ -52,14 +52,13 @@ public class GameplayManager : MonoBehaviour
     public bool fear = false;
     [SerializeField] private float feartime;
     private Pathfinder _pathfinder;
-
     public int remainingpoints;
     
     // Start is called before the first frame update
     void Start()
     {
         remainingpoints = _pathfinder.ballsnumber;
-        Instantiate(player, _pathfinder.maptilemap.layoutGrid.GetCellCenterWorld(spawn), transform.rotation).GetComponent<Player>().target = spawn;
+        Instantiate(playerpref, _pathfinder.maptilemap.layoutGrid.GetCellCenterWorld(spawn), transform.rotation).GetComponent<Player>().target = spawn;
         for (int i = 0; i < enemiesPref.Length; i++)
         {
             enemy = Instantiate(enemiesPref[i], _pathfinder.maptilemap.layoutGrid.GetCellCenterWorld(spawnpos[i]), transform.rotation);
@@ -114,7 +113,7 @@ public class GameplayManager : MonoBehaviour
             score = 0;
         }
 
-        if (player != null)
+        if (playerpref != null)
         {
             scoreTxt.text = "Score : " + score;
             lastScoreTxt.text = "Dernier score : " + lastScore;
@@ -189,6 +188,11 @@ public class GameplayManager : MonoBehaviour
         string minutes = ((int) t / 60).ToString();
         string seconds = (t % 60).ToString("f1");
         gameTimeWinTxt.text = "Temps de jeu :  " + minutes + ":" + seconds;
+
+        if (score > lastScore)
+        {
+            PlayerPrefs.SetInt("Score", score);
+        }
     }
 
     public void ShowGameOver()
@@ -209,6 +213,15 @@ public class GameplayManager : MonoBehaviour
         string minutes = ((int) t / 60).ToString();
         string seconds = (t % 60).ToString("f1");
         gameTimeTxt.text = "Temps de jeu :  " + minutes + ":" + seconds;
+    }
+
+    public void Setplayeractive()
+    {
+        if (GameObject.FindWithTag("Player") != null)
+        {
+            GameObject.FindWithTag("Player").GetComponent<Player>().Isplay = true;
+        }
+        
     }
 
     public void onClick_Retry()

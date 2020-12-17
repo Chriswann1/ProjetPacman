@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float lerppos = 0;
     [SerializeField] private Vector3Int[] portals;
     [SerializeField] private AudioClip powersound;
-
+    public bool Isplay;
 
 
     //scoreManagement
@@ -50,7 +50,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         actualtilepos = target;
-        CheckInput();
+        if (Isplay)
+        {
+            CheckInput();
+        }
+
         lerppos = (Time.time - starttime) * speed;
         transform.position = Vector3.Lerp(tilemap.layoutGrid.GetCellCenterWorld(actualtilepos), tilemap.layoutGrid.GetCellCenterWorld(target), lerppos);
         if (lerppos >= 1f)

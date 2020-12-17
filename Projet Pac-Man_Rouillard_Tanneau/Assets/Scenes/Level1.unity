@@ -1345,7 +1345,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f481eeffef85bcf4898bd02cf80e00c7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.476
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2263,6 +2263,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1000717050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1000717051}
+  m_Layer: 0
+  m_Name: Balls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1000717051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000717050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.924222, y: 0.7469535, z: -1473.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1009052503
 GameObject:
   m_ObjectHideFlags: 0
@@ -2513,6 +2543,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ButtonTutoOut
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1633669401}
+        m_MethodName: Setplayeractive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1277708336
@@ -2846,7 +2887,11 @@ MonoBehaviour:
     type: 3}
   energizerchance: 1
   enemyspawndoor: {x: 5, y: 5, z: 0}
-  portals: []
+  portals:
+  - {x: -3, y: 2, z: 0}
+  - {x: 13, y: 2, z: 0}
+  ballsparent: {fileID: 1000717051}
+  ballsnumber: 0
 --- !u!4 &1633669400
 Transform:
   m_ObjectHideFlags: 0
@@ -2874,7 +2919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 3
-  player: {fileID: 7680722994674414043, guid: 090266ef42a93254fa0e28779ecb5e58, type: 3}
+  playerpref: {fileID: 7680722994674414043, guid: 090266ef42a93254fa0e28779ecb5e58,
+    type: 3}
   spawn: {x: 5, y: -5, z: 0}
   enemiesPref:
   - {fileID: 2121182480860816052, guid: 6eaf721866b11414ea69c21d1fa63824, type: 3}
@@ -2906,6 +2952,7 @@ MonoBehaviour:
   victorySound: {fileID: 8300000, guid: c719453df55dab9499bac9344ce8b0a7, type: 3}
   fear: 0
   feartime: 5
+  remainingpoints: 0
 --- !u!1 &1680281772
 GameObject:
   m_ObjectHideFlags: 0

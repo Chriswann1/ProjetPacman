@@ -17,8 +17,10 @@ public class Pathfinder : MonoBehaviour
     [SerializeField] private int energizerchance;
     [SerializeField] private Vector3Int enemyspawndoor;
     [SerializeField] private Vector3Int[] portals;
+    [SerializeField] private Transform ballsparent;
     private bool inbase = true;
     public int ballsnumber;
+    
     
 
 
@@ -69,8 +71,9 @@ public class Pathfinder : MonoBehaviour
                     }
                     else
                     {
-                        Instantiate(ball, maptilemap.layoutGrid.GetCellCenterWorld(actualnode), transform.rotation);
+                        Instantiate(ball, maptilemap.layoutGrid.GetCellCenterWorld(actualnode), transform.rotation).transform.parent = ballsparent;
                         ballsnumber++;
+                        
 
                     }
                 }
