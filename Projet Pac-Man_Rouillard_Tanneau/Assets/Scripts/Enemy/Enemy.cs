@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
+    /// AI Behaviour
     public enum BehaviourAI
     {
         Idle,
@@ -15,30 +15,37 @@ public class Enemy : MonoBehaviour
         
     }
     public BehaviourAI ActualBehaviour = BehaviourAI.Idle;
-
+    /// /AI Behaviour
+    
+    /// waypoints system
     private Stack<Vector3> waypoints;
     private Vector3 nextwaypoint;
+    /// /waypoints system
     
+    /// /abilities
     [SerializeField] private float reflex;
     [SerializeField] private float speed;
     [SerializeField] private int PointToStart;
-    
     public int id;
-    protected Vector3 target;
-    
-    
+    /// /abilities
 
+    /// target
+    protected Vector3 target;
+    /// /target
+    
+    /// pathfinder
     [SerializeField]
     public Pathfinder _pathfinder;
+    /// /pathfinder
 
-    public virtual void Start()
+    public virtual void Start() //Settings the waypoints stack, get the pathfinder and StartCoroutine Loop
     {
         waypoints = new Stack<Vector3>();
         _pathfinder = GameObject.FindWithTag("GameplayManager").GetComponent<Pathfinder>();
         StartCoroutine(FindPath());
     }
     
-    public virtual void Update()
+    public virtual void Update() //used to navigate between each waypoint in the waypoints stack + manage the sprite color and behaviour if fear is true
     {
 
         if (waypoints.Count > 0)
@@ -65,7 +72,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public virtual IEnumerator FindPath()
+    public virtual IEnumerator FindPath() //Coroutine that make the "reflex" of the AI in a switch. it calls pathfinder class when needed to find a path to the target and get the waypoints that it return
     {
         while (true)
         {
@@ -106,7 +113,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other) //used to detect when player collide with enemies
     {
         if (other.CompareTag("Player"))
         {

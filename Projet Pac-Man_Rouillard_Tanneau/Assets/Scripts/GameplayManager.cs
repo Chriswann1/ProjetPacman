@@ -5,57 +5,75 @@ using UnityEngine.UI;
 
 public class GameplayManager : MonoBehaviour
 {
-
+    /// GameplayManagerInstance
     public static GameplayManager Instance;
+    /// /GameplayManagerInstance
+
+    /// Player Settings
     public int life;
     public GameObject playerpref;
     public Vector3Int spawn;
+    /// /Player Settings
 
+    /// EnnemiesSettings
     [SerializeField] private GameObject[] enemiesPref;
     [SerializeField] private GameObject enemy;
     [SerializeField] private Vector3Int[] spawnpos;
-    
+    /// /EnemiesSettings
 
-    //Panel GameOver and Winning
+    /// Panel GameOver and Winning
     public GameObject panelWinning;
     public GameObject panelGameOver;
-
+    /// Panel GameOver and Winning
+    
+    /// All text variables
     public Text finalScoreTxt;
     public Text finalScoreWinTxt;
     public Text gameTimeTxt;
     public Text gameTimeWinTxt;
-
     public Text pacGumTxt;
     public Text pacGumWinTxt;
+    /// /All text variables
 
+    /// Gun management
     private static int gumDestroyed;
     private static int gumDestroyedWin;
-
     public int destroyedPacGum;
-
-    //Score and save score
+    /// /Gun management
+    
+    
+    /// Score and save score
     [SerializeField] private int lastScore = 0;
     public Text lastScoreTxt;
     public int score;
     public Text scoreTxt;
-
-    //TimePrinting and Management 
+    public int remainingpoints;
+    /// /Score and save score
+    
+    /// TimePrinting and Management 
     public Text timerText;
     private float startTime;
     private bool completedParty = false;
-
-    //Sound
+    /// /TimePrinting and Management
+    
+    
+    /// Sound
     public AudioClip defeatSound;
     public AudioSource audioSource;
     public AudioClip victorySound;
+    /// /Sound
     
+    /// fear system
     public bool fear = false;
     [SerializeField] private float feartime;
+    /// /fear system
+    
+    /// Pathfinder variable
     private Pathfinder _pathfinder;
-    public int remainingpoints;
+    /// /Pathfinder variable
     
     // Start is called before the first frame update
-    void Start()
+    void Start() //Use start to set player settings, points, Score, time and ennemies
     {
         remainingpoints = _pathfinder.ballsnumber;
         Instantiate(playerpref, _pathfinder.maptilemap.layoutGrid.GetCellCenterWorld(spawn), transform.rotation).GetComponent<Player>().target = spawn;
@@ -70,7 +88,7 @@ public class GameplayManager : MonoBehaviour
         SaveScore();
     }
 
-    void Awake()
+    void Awake() // use awake to initialize gameplay manager instance and get pathfinder
     {
         
         if (Instance == null)
@@ -86,7 +104,7 @@ public class GameplayManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() //use it to manage time, score, win and lose + old life system
     {
 
         
@@ -137,14 +155,14 @@ public class GameplayManager : MonoBehaviour
         
     }
     
-    public void Mute()
+    public void Mute() //Used to mute music
     {
         AudioListener.pause = !AudioListener.pause;
     }
 
-    public void SaveScore()
+    public void SaveScore() //This function will recover the score Set in Player's script for the PlayerPrefs
     {
-        //This function will recover the score Set in Player's script for the PlayerPrefs
+
         if (PlayerPrefs.HasKey("Score"))
         {
             lastScore = PlayerPrefs.GetInt("Score");
@@ -152,7 +170,7 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public IEnumerator FearPower()
+    public IEnumerator FearPower() //used to set a "timer" between fear and not in fear mode
     {
         fear = true;
         yield return new WaitForSeconds(feartime);
@@ -161,7 +179,7 @@ public class GameplayManager : MonoBehaviour
         yield return null;
     }
 
-    public void RespawnEnemy(int id)
+    public void RespawnEnemy(int id) //Make respawn the enemy that identity his prefab 
     {
         GameObject spawned = Instantiate(enemiesPref[id],
             _pathfinder.maptilemap.layoutGrid.GetCellCenterWorld(spawnpos[id]),
@@ -170,7 +188,7 @@ public class GameplayManager : MonoBehaviour
 
     }
 
-    public void ShowWin()
+    public void ShowWin() //activate the Win menu
     {
         panelWinning.SetActive(true);
         //A winning sound will be played when the player will win the party
@@ -195,7 +213,7 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public void ShowGameOver()
+    public void ShowGameOver() //activate the Game Over menu
     {
         panelGameOver.SetActive(true);
 
@@ -219,7 +237,7 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public void Setplayeractive()
+    public void Setplayeractive()//used by the text/button at the start of the game to make the player able to move
     {
         if (GameObject.FindWithTag("Player") != null)
         {
@@ -228,19 +246,19 @@ public class GameplayManager : MonoBehaviour
         
     }
 
-    public void onClick_Retry()
+    public void onClick_Retry()//used by a button to reload the scene
     {
         //SceneManager.UnloadSceneAsync(1);
         SceneManager.LoadScene("Level1");
     }
 
-    public void onClick_Menu()
+    public void onClick_Menu()//used by a button to load the main menu scene
     {
         //SceneManager.UnloadSceneAsync(1);
         SceneManager.LoadScene("MainMenu"); 
     }
 
-    public void exitGame()
+    public void exitGame()//used by a button to quit the game
     {
         Application.Quit();
         Debug.Log("Game is exiting");

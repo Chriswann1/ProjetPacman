@@ -7,24 +7,35 @@ using Random = UnityEngine.Random;
 
 public class Pathfinder : MonoBehaviour
 {
-    public static Dictionary<Vector3Int, Node> TileNode;
-    public Tilemap maptilemap;
-    [SerializeField] private Vector3Int startingtile;
-
+    /// Tilemap
+    public static Dictionary<Vector3Int, Node> TileNode; 
+    public Tilemap maptilemap;                           
+    [SerializeField] private Vector3Int startingtile;  
+    [SerializeField] private Vector3Int enemyspawndoor;
+    private bool inbase = true;
+    [SerializeField] private Vector3Int[] portals;
+    /// /Tilemap
+    
+    /// AntiCrash
     [SerializeField] private int overflowlimit;
+    /// /AntiCrash>
+
+    /// Pickable Object
+    [SerializeField] private Transform ballsparent;
     [SerializeField] private GameObject ball;
+    public int ballsnumber;
     [SerializeField] private GameObject energizer;
     [SerializeField] private int energizerchance;
-    [SerializeField] private Vector3Int enemyspawndoor;
-    [SerializeField] private Vector3Int[] portals;
-    [SerializeField] private Transform ballsparent;
-    private bool inbase = true;
-    public int ballsnumber;
+    /// /Pickable Object
+
+
+
+
     
     
 
 
-    private void Awake()
+    private void Awake() //This void is mainly used to initialize the node network, creating all the nodes and stocking them in TileNode dictionary
     {
         
         Queue<Vector3Int> NodeQueue = new Queue<Vector3Int>();
@@ -96,7 +107,7 @@ public class Pathfinder : MonoBehaviour
 
     }
 
-    public Stack<Vector3> Pathfind (Vector3 From_world, Vector3 To_world)
+    public Stack<Vector3> Pathfind (Vector3 From_world, Vector3 To_world) //Function that navigate in the nodes network, doing the first path to the target and return the result of the next function ReversePathfind
     {
         List<Node> usedNode = new List<Node>();
         if (TileNode.ContainsValue(TileNode[maptilemap.layoutGrid.WorldToCell(From_world)]) && TileNode.ContainsValue(TileNode[maptilemap.layoutGrid.WorldToCell(To_world)]))
@@ -159,7 +170,7 @@ public class Pathfinder : MonoBehaviour
 
     }
 
-    public Stack<Vector3> ReversePathfind(Node Target, Node Root, List<Node> usedNode)
+    public Stack<Vector3> ReversePathfind(Node Target, Node Root, List<Node> usedNode) //This function use the parents set by the function Pathfind and return a stack of Vector3 waypoints
     {
         if (Target == Root)
         {
@@ -189,7 +200,7 @@ public class Pathfinder : MonoBehaviour
         return path;
     }
 
-    void Resetparent(List<Node> usedNode)
+    void Resetparent(List<Node> usedNode) //this function reset every parents in a the  usedNode list to avoid the "dead tree occurence"
     {
         foreach (Node used in usedNode)
         {

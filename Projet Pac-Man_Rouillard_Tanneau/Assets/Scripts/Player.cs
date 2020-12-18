@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,46 +7,43 @@ public class Player : MonoBehaviour
     private GameObject ball;
     //public static int destroyedPacGum;
 
-    //PlayerMovement
+    /// PlayerMovement
+    public bool Isplay;
     public float speed;
-
     private Vector3Int direction = Vector3Int.zero;
     private Vector3Int currentdirection = Vector3Int.zero;
     public Vector3Int target = Vector3Int.zero;
     private Vector3Int actualtilepos = Vector3Int.zero;
-    private Tilemap tilemap;
     public Vector3 targetworld = Vector3.zero;
-    [SerializeField] private int scoretowin;
     private bool inmovement = false;
     private float starttime;
     private float lerppos = 0;
     [SerializeField] private Vector3Int[] portals;
+    /// /PlayerMovement
+    
+    /// tilemap
+    private Tilemap tilemap;
+    /// /tilemap
+    
+    /// sound
     [SerializeField] private AudioClip powersound;
-    public bool Isplay;
+    /// /sound
 
 
-    //scoreManagement
-    public float score;
 
-    //HealthManagement
-    //public float life = 3;
-
-    // Update is called once per frame
-
-    private void Awake()
+    private void Awake()//used to get the tilemap
     {
         tilemap = GameObject.FindWithTag("GameplayManager").GetComponent<Pathfinder>().maptilemap;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Start()//Used to reset Pacgun in gameplaymanager
     {
 
         Reset();
 
     }
 
-    void Update()
+    void Update() //Used for movement
     {
         actualtilepos = target;
         if (Isplay)
@@ -69,7 +65,7 @@ public class Player : MonoBehaviour
         GameplayManager.Instance.destroyedPacGum = 0;
     }
 
-    void CheckInput()
+    void CheckInput() //Used to check if we can move and get input from Vertical and Horizontal Axis (ZQSD + Arrows)
     {
         float vertical = Input.GetAxisRaw("Vertical");
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -112,7 +108,7 @@ public class Player : MonoBehaviour
             }
     }
 
-    void Orientation()
+    void Orientation()//used to set the orientation of the sprite
     {
         if (currentdirection == Vector3Int.left)
         {
@@ -136,7 +132,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)//Used to detect Ball and powerball, enemy process to the "death" detection if collide with player
     {
         if (other.gameObject.CompareTag("Ball"))
         {
